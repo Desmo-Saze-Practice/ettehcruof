@@ -1,3 +1,5 @@
+const os = require('os');
+
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -22,25 +24,25 @@ console.log(min);
 console.log(max);
 
 const ask = function (question) {
-    rl.question(`${question}\n`, (answer) => {
+    rl.question(`${question} ${os.EOL}`, (answer) => {
         if (answer != '-' && answer != '+' && answer != '=') {
-            console.log(`You must use the symbole +, - or = to help the computer find your number. Please try again.\n`);
-            ask(`Is your number ${guess} ?\n`);
+            console.log(`You must use the symbole +, - or = to help the computer find your number. Please try again. ${os.EOL}`);
+            ask(`Is your number ${guess} ? ${os.EOL}`);
         }
         else {
             switch (answer) {
                 case '+':
-                    min = guess;
+                    min = guess+1;
                     guess = makeGuess(min, max);
-                    ask(`ok it's more... Is your number ${guess}\n`)
+                    ask(`ok it's more... Is your number ${guess} ${os.EOL}`)
                     break;
                 case '-':
-                    max = guess;
+                    max = guess-1;
                     guess = makeGuess(min, max);
-                    ask(`ok it's less... Is your number ${guess}\n`)
+                    ask(`ok it's less... Is your number ${guess} ${os.EOL}`)
                     break;
                 default:
-                    console.log(`Congratulations, we found your number ! It was ${guess} !\n`);
+                    console.log(`Congratulations, we found your number ! It was ${guess} ! ${os.EOL}`);
                     rl.close();
                     break;
             }
@@ -48,4 +50,5 @@ const ask = function (question) {
     })
 }
 
+// lunch game
 ask(`Pick a number then help me find it with "+", "-" or "=". Is your number ${guess} ?`);
